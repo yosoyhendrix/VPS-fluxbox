@@ -5,7 +5,7 @@ Este script se enfoca en instalar Fluxbox, ROX-Filer, y Firefox-ESR, junto con l
 ## instalación 
 ## 1 Descage el script 
 ```
-https://raw.githubusercontent.com/yosoyhendrix/VPS-fluxbox-/refs/heads/main/install_custom_desktop.sh
+wget https://raw.githubusercontent.com/yosoyhendrix/VPS-fluxbox-/refs/heads/main/install_custom_desktop.sh
 ```
 ## 2 Dale permiso de ejecución
 ```
