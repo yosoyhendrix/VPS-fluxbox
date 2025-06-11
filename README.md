@@ -23,14 +23,3 @@ sudo ./install_custom_desktop.sh
    * Para iniciar una sesión VNC, ese usuario deberá ejecutar: vncserver :1 (o el número de display que prefiera, si :1 ya está en uso).
    * Asegúrate de que los puertos VNC (5901-5910/TCP) estén abiertos en el firewall de tu proveedor de VPS además de UFW.
 Este script te dará la flexibilidad que buscas, permitiendo que cada usuario gestione su propia sesión VNC, lo cual es más seguro y adaptable a entornos multiusuario.
-
-
-## nota
-Para restaurar la configuración de Fluxbox después de haber borrado la carpeta .fluxbox, puedes hacer lo siguiente:
- * Copiar la configuración predeterminada del sistema: Fluxbox tiene una configuración predeterminada que puedes copiar a tu directorio personal.
-   ```
-   cp -r /etc/X11/fluxbox ~/.fluxbox
-   
-   ```
-   Esto copiará la configuración base de Fluxbox.
- * Reiniciar Fluxbox: Para que los cambios surtan efecto, debes reiniciar Fluxbox. Puedes cerrar sesión y volver a iniciarla, o usar la opción "Restart" o "Reconfigure" en el menú de Fluxbox (clic derecho en el escritorio).
