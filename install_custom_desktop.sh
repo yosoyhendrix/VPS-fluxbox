@@ -109,7 +109,7 @@ if which /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 > /dev/n
 fi
 
 # Iniciar ROX-Filer para el escritorio (pinboard) y como gestor de archivos
-rox -S &
+rox &
 
 # Establecer el fondo de pantalla (opcional, requiere 'feh')
 xsetroot -solid "#2E3436" & # Un gris oscuro por defecto
