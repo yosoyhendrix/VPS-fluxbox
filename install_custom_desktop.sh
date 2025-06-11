@@ -167,7 +167,7 @@ log_message "Instalando Firefox ESR (navegador web recomendado para Debian)..."
 install_package "firefox-esr"
 
 log_message "Instalando TigerVNC Server (para VNC bajo demanda por usuario)..."
-install_package "tigervnc-standalone-server"
+install_package "tightvncserver"
 install_package "tigervnc-common"
 
 # Herramientas adicionales útiles
