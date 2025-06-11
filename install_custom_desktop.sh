@@ -258,5 +258,75 @@ log_message "-------------------------------------------------------------------
 
 # Reinicio recomendado para aplicar todos los cambios de kernel y servicios
 log_message "El sistema se reiniciará en 10 segundos para aplicar todos los cambios."
-sleep 10
+sleep 15
+#!/bin/bash
+
+# Script para crear/configurar el archivo de menú global de Fluxbox.
+
+# --- Configuración ---
+FLUXBOX_DIR="/etc/X11/fluxbox"
+MENU_FILE="$FLUXBOX_DIR/menu"
+LOG_FILE="/var/log/fluxbox_menu_config.log"
+
+# --- Funciones de Ayuda ---
+
+log_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+}
+
+check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        log_message "Este script debe ejecutarse como root o con sudo."
+        echo "Por favor, ejecuta: sudo ./$(basename "$0")"
+        exit 1
+    fi
+}
+
+# --- Inicio del Script ---
+
+check_root
+log_message "Iniciando la configuración del menú global de Fluxbox."
+log_message "Los detalles de la ejecución se guardarán en $LOG_FILE"
+
+# 1. Crear el directorio /etc/X11/fluxbox si no existe
+if [ ! -d "$FLUXBOX_DIR" ]; then
+    log_message "El directorio '$FLUXBOX_DIR' no existe. Creándolo..."
+    if mkdir -p "$FLUXBOX_DIR" >> "$LOG_FILE" 2>&1; then
+        log_message "Directorio '$FLUXBOX_DIR' creado correctamente."
+    else
+        log_message "Error al crear el directorio '$FLUXBOX_DIR'. Abortando."
+        exit 1
+    fi
+else
+    log_message "El directorio '$FLUXBOX_DIR' ya existe."
+fi
+
+# 2. Crear o sobrescribir el archivo de menú
+log_message "Creando/Sobrescribiendo el archivo '$MENU_FILE'..."
+
+cat <<EOL > "$MENU_FILE"
+[begin] (fluxbox)
+[include] (/etc/X11/fluxbox/fluxbox-menu)
+[exec] (Firefox) {firefox}
+[exec] (ROX-Filer) {rox}
+[end]
+EOL
+
+if [ $? -eq 0 ]; then
+    log_message "Contenido agregado al archivo '$MENU_FILE' correctamente."
+    # Asegurar permisos de lectura para todos
+    chmod 644 "$MENU_FILE" >> "$LOG_FILE" 2>&1
+    log_message "Permisos del archivo '$MENU_FILE' establecidos a 644."
+else
+    log_message "Error al agregar contenido al archivo '$MENU_FILE'. Abortando."
+    exit 1
+fi
+
+log_message "Configuración del menú global de Fluxbox completada."
+log_message "--------------------------------------------------------------------------------"
+log_message "Para que los cambios surtan efecto, reinicia tu sesión de Fluxbox o selecciona 'Reconfigure'/'Reload config' desde el menú de Fluxbox si ya estás en una sesión."
+log_message "--------------------------------------------------------------------------------"
+
+exit 0
+
 reboot
