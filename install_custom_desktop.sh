@@ -258,7 +258,7 @@ log_message "-------------------------------------------------------------------
 
 # Reinicio recomendado para aplicar todos los cambios de kernel y servicios
 log_message "El sistema se reiniciará en 10 segundos para aplicar todos los cambios."
-sleep 15
+sleep 20
 #!/bin/bash
 
 # Script para crear/configurar el archivo de menú global de Fluxbox.
