@@ -121,3 +121,4 @@ log_message "Asegúrate de reconfigurar cualquier firewall externo (de tu provee
 log_message "--------------------------------------------------------------------------------"
 
 exit 0
+vncserver :1 -geometry 1024x700 -depth 24
